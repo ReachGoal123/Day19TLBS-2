@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "MenuTableViewController.h"
+#import "MainTabbarController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +18,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+  
+    MenuTableViewController *mtvc = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"menuvc"];
+    
+    self.mtc = (MainTabbarController*)self.window.rootViewController;
+    
+    self.drawerController = [[ICSDrawerController alloc]initWithLeftViewController:mtvc centerViewController:self.mtc];
+    
+    self.window.rootViewController = self.drawerController;
     return YES;
 }
 
